@@ -20,6 +20,7 @@ import com.gmail.filoghost.chestcommands.bridge.EconomyBridge;
 import com.gmail.filoghost.chestcommands.internal.ExtendedIconMenu;
 import com.gmail.filoghost.chestcommands.internal.MenuInventoryHolder;
 import com.gmail.filoghost.chestcommands.internal.RequiredItem;
+import com.gmail.filoghost.chestcommands.util.InventoryUtils;
 import com.gmail.filoghost.chestcommands.util.MaterialsRegistry;
 import com.gmail.filoghost.chestcommands.util.StringUtils;
 import org.bukkit.ChatColor;
@@ -167,6 +168,12 @@ public class ExtendedIcon extends Icon {
 				player.sendMessage(ChestCommands.getLang().no_money.replace("{money}", EconomyBridge.formatMoney(moneyPrice)));
 				return closeOnClick;
 			}
+			
+			if (InventoryUtils.countOpenSlots(player) == 0) {
+				player.sendMessage(ChestCommands.getLang().no_slots);
+				return closeOnClick;
+			}
+			
 		}
 
 		if (expLevelsPrice > 0) {

@@ -49,4 +49,19 @@ public class InventoryUtils {
 		return contained >= minAmount;
 	}
 
+	// Except for equipments.
+	public static int countOpenSlots(Player p)
+    {
+        int count = 0;
+        if (p == null)
+            return -1;
+
+        ItemStack[] items = p.getInventory().getContents();
+        // Don't count equipment or offhand as empty slots
+        for (int i = 0; i < 36; i++)
+            if ((items[i] == null || items[i].getType() == Material.AIR))
+                count++;
+
+        return count;
+    }
 }
